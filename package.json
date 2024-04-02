@@ -1,0 +1,23 @@
+{
+  "name": "hugging-face",
+  "version": "1.0.0",
+  "description": "Proyecto destinado a realizar pruebas al servicio de Hugging Face",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aledjv22/hugging-face.git"
+  },
+  "author": "Victor Alejandro Díaz Jáuregui",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aledjv22/hugging-face/issues"
+  },
+  "homepage": "https://github.com/aledjv22/hugging-face#readme",
+  "dependencies": {
+    "@huggingface/inference": "^2.6.6",
+    "dotenv": "^16.4.5"
+  }
+}
