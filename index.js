@@ -49,10 +49,21 @@ async function translateText(textInput) {
   } catch (error) {
     console.error(chalk.red(error));
   }
+
+  // Pregunta al usuario por otro texto a traducir
+  askForText();
 }
 
-// Ingreso de texto
-rl.question('Ingrese el texto a traducir: ', (textInput) => {
-  translateText(textInput);
-  rl.close();
-});
+// Función para preguntar al usuario por el texto a traducir
+function askForText() {
+  rl.question('Ingrese el texto a traducir (o escriba "exit" para salir): ', (textInput) => {
+    if (textInput.toLowerCase() === 'exit') {
+      rl.close();
+    } else {
+      translateText(textInput);
+    }
+  });
+}
+
+// Inicio del programa
+askForText();
