@@ -2,6 +2,7 @@ import { HfInference } from "@huggingface/inference";
 import { config } from "dotenv";
 import chalk from 'chalk';
 import readline from 'readline';
+import ora from 'ora';
 
 config();
 
@@ -18,6 +19,8 @@ const rl = readline.createInterface({
 
 // Función para traducir el texto
 async function translateText(textInput) {
+  const spinner = ora('Traduciendo...').start();
+
   // Traducción de español a ingles
   model = "Helsinki-NLP/opus-mt-es-en";
   try {
@@ -29,10 +32,14 @@ async function translateText(textInput) {
         "tgt_lang": "en"
       }
     });
+    spinner.succeed('Traducción al inglés completada');
     console.log('\n\nLa traducción al ingles es: \n', chalk.blue(result.translation_text));
   } catch (error) {
+    spinner.fail('Error en la traducción al inglés');
     console.error(chalk.red(error));
   }
+
+  spinner.start('Traduciendo al español...');
 
   // Traducción de ingles a español
   model = "Helsinki-NLP/opus-mt-en-es";
@@ -45,8 +52,10 @@ async function translateText(textInput) {
         "tgt_lang": "es"
       }
     });
+    spinner.succeed('Traducción al español completada');
     console.log('\n\nLa traducción al español es: \n', chalk.blue(result.translation_text));
   } catch (error) {
+    spinner.fail('Error en la traducción al español');
     console.error(chalk.red(error));
   }
 
@@ -56,7 +65,7 @@ async function translateText(textInput) {
 
 // Función para preguntar al usuario por el texto a traducir
 function askForText() {
-  rl.question('Ingrese el texto a traducir (o escriba "exit" para salir): ', (textInput) => {
+  rl.question('Ingrese el texto a traducir \n(o escriba "exit" para salir): ', (textInput) => {
     if (textInput.toLowerCase() === 'exit') {
       rl.close();
     } else {
