@@ -2,6 +2,7 @@ import { HfInference } from "@huggingface/inference";
 import { config } from "dotenv";
 import chalk from 'chalk';
 import readline from 'readline';
+import clipboardy from 'clipboardy';
 
 config();
 const print = console.log;
@@ -39,6 +40,8 @@ async function translateText(textInput) {
       chalk.green(result.translation_text), 
       '\n'
     );
+    // Copiar la traducción al portapapeles
+    clipboardy.writeSync(result.translation_text);
   } catch (error) {
     console.error(chalk.bgRed.bold.italic(error));
   }
