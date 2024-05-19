@@ -22,6 +22,8 @@ async function translateText(textInput) {
   // Traducción de español a ingles
   model = "Helsinki-NLP/opus-mt-es-en";
   try {
+    // Mensaje de carga
+    print(chalk.bgCyan.bold.italic('\nTraduciendo... Por favor, espere.'));
     result = await hf.translation({
       model,
       inputs: textInput,
