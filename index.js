@@ -32,12 +32,13 @@ async function translateText(textInput) {
     });
     // Resultado de la traducción
     print(
-      chalk.bgGreen('\n-> La traducción al ingles es:\n'), 
+      chalk.bgGreen.bold.italic('\n-> La traducción al ingles es:'),
+      chalk.green.bold('\n-+'),
       chalk.green(result.translation_text), 
       '\n'
     );
   } catch (error) {
-    console.error(chalk.bgRed(error));
+    console.error(chalk.bgRed.bold.italic(error));
   }
 
   // Pregunta al usuario por otro texto a traducir
@@ -49,12 +50,12 @@ function askForText() {
   print(chalk.magenta('============================================='));
   print(chalk.magenta('=          Traductor de texto               ='));
   print(chalk.magenta('============================================='));
-  let message = chalk.bgBlue('-> Ingrese el texto a traducir:') ;
-  message += chalk.blue('\n-+ ');
+  let message = chalk.bgBlackBright.bold.italic('-> Ingrese el texto a traducir:') ;
+  message += chalk.bold('\n-+ ');
   rl.question(message, (textInput) => {
     if (textInput.toLowerCase() === 'exit') {
       rl.close();
-      print(chalk.bgYellowBright('\n¡Hasta luego!'));
+      print(chalk.bold.italic.bgYellowBright('\n¡Hasta luego!'));
     } else {
       translateText(textInput);
     }
