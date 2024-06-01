@@ -33,7 +33,7 @@ async function translateTextEs(textInput) {
   model = "Helsinki-NLP/opus-mt-es-en";
   try {
     // Mensaje de carga
-    print(chalk.bgCyan.bold.italic(messages[selectedLanguage]['translating']));
+    print(chalk.bgMagenta.bold.italic(messages[selectedLanguage]['translating']));
     result = await hf.translation({
       model,
       inputs: textInput,
@@ -44,9 +44,9 @@ async function translateTextEs(textInput) {
     });
     // Resultado de la traducción
     print(
-      chalk.bgGreen.bold.italic(messages[selectedLanguage]['translationIs']),
-      chalk.green.bold('\n-+'),
-      chalk.green(result.translation_text), 
+      chalk.bgBlue.bold.italic(messages[selectedLanguage]['translationIs']),
+      chalk.cyan.bold('\n-+'),
+      chalk.cyan(result.translation_text), 
       '\n'
     );
     // Copiar la traducción al portapapeles
@@ -65,7 +65,7 @@ async function translateTextEn(textInput) {
   model = "Helsinki-NLP/opus-mt-en-es";
   try {
     // Mensaje de carga
-    print(chalk.bgCyan.bold.italic(messages[selectedLanguage]['translating']));
+    print(chalk.bgMagenta.bold.italic(messages[selectedLanguage]['translating']));
     result = await hf.translation({
       model,
       inputs: textInput,
@@ -76,9 +76,9 @@ async function translateTextEn(textInput) {
     });
     // Resultado de la traducción
     print(
-      chalk.bgGreen.bold.italic(messages[selectedLanguage]['translationIs']),
-      chalk.green.bold('\n-+'),
-      chalk.green(result.translation_text), 
+      chalk.bgBlue.bold.italic(messages[selectedLanguage]['translationIs']),
+      chalk.cyan.bold('\n-+'),
+      chalk.cyan(result.translation_text), 
       '\n'
     );
     // Copiar la traducción al portapapeles
