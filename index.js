@@ -15,13 +15,25 @@ let result = null;
 let model = null;
 let selectedLanguage = null;
 
+// Mensajes en diferentes idiomas
+const messages = {
+  'English': {
+    'translating': '\nTranslating... Please wait.',
+    'translationIs': '\n-> The translation is:',
+  },
+  'Español': {
+    'translating': '\nTraduciendo... Por favor, espere.',
+    'translationIs': '\n-> La traducción es:',
+  }
+};
+
 // Función para traducir texto de español a ingles
 async function translateTextEs(textInput) {
   // Traducción de español a ingles
   model = "Helsinki-NLP/opus-mt-es-en";
   try {
     // Mensaje de carga
-    print(chalk.bgCyan.bold.italic('\nTraduciendo... Por favor, espere.'));
+    print(chalk.bgCyan.bold.italic(messages[selectedLanguage]['translating']));
     result = await hf.translation({
       model,
       inputs: textInput,
@@ -32,7 +44,7 @@ async function translateTextEs(textInput) {
     });
     // Resultado de la traducción
     print(
-      chalk.bgGreen.bold.italic('\n-> La traducción al ingles es:'),
+      chalk.bgGreen.bold.italic(messages[selectedLanguage]['translationIs']),
       chalk.green.bold('\n-+'),
       chalk.green(result.translation_text), 
       '\n'
@@ -53,7 +65,7 @@ async function translateTextEn(textInput) {
   model = "Helsinki-NLP/opus-mt-en-es";
   try {
     // Mensaje de carga
-    print(chalk.bgCyan.bold.italic('\nTraduciendo... Por favor, espere.'));
+    print(chalk.bgCyan.bold.italic(messages[selectedLanguage]['translating']));
     result = await hf.translation({
       model,
       inputs: textInput,
@@ -64,7 +76,7 @@ async function translateTextEn(textInput) {
     });
     // Resultado de la traducción
     print(
-      chalk.bgGreen.bold.italic('\n-> La traducción al español es:'),
+      chalk.bgGreen.bold.italic(messages[selectedLanguage]['translationIs']),
       chalk.green.bold('\n-+'),
       chalk.green(result.translation_text), 
       '\n'
