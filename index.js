@@ -18,8 +18,8 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-// Función para traducir el texto
-async function translateText(textInput) {
+// Función para traducir textto de español a ingles
+async function translateTextEs(textInput) {
   // Traducción de español a ingles
   model = "Helsinki-NLP/opus-mt-es-en";
   try {
@@ -50,6 +50,38 @@ async function translateText(textInput) {
   askForText();
 }
 
+// Función para traducir texto de ingles a español
+async function translateTextEn(textInput) {
+  // Traducción de ingles a español
+  model = "Helsinki-NLP/opus-mt-en-es";
+  try {
+    // Mensaje de carga
+    print(chalk.bgCyan.bold.italic('\nTraduciendo... Por favor, espere.'));
+    result = await hf.translation({
+      model,
+      inputs: textInput,
+      parameters: {
+        "src_lang": "en",
+        "tgt_lang": "es"
+      }
+    });
+    // Resultado de la traducción
+    print(
+      chalk.bgGreen.bold.italic('\n-> La traducción al español es:'),
+      chalk.green.bold('\n-+'),
+      chalk.green(result.translation_text), 
+      '\n'
+    );
+    // Copiar la traducción al portapapeles
+    clipboardy.writeSync(result.translation_text);
+  } catch (error) {
+    console.error(chalk.bgRed.bold.italic(error));
+  }
+
+  // Pregunta al usuario por otro texto a traducir
+  askForText();
+}
+
 // Función para preguntar al usuario por el texto a traducir
 function askForText() {
   print(chalk.magenta('============================================='));
@@ -62,7 +94,7 @@ function askForText() {
       rl.close();
       print(chalk.bold.italic.bgYellowBright('\n¡Hasta luego!'));
     } else {
-      translateText(textInput);
+      translateTextEs(textInput);
     }
   });
 }
