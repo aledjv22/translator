@@ -1,7 +1,7 @@
 import { HfInference } from "@huggingface/inference";
 import { config } from "dotenv";
 import chalk from 'chalk';
-import readline from 'readline';
+import inquirer from 'inquirer';
 import clipboardy from 'clipboardy';
 
 config();
@@ -13,12 +13,8 @@ const hf = new HfInference(process.env.HF_ACCESS_TOKEN);
 // Variables
 let result = null;
 let model = null;
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
-// Función para traducir textto de español a ingles
+// Función para traducir texto de español a ingles
 async function translateTextEs(textInput) {
   // Traducción de español a ingles
   model = "Helsinki-NLP/opus-mt-es-en";
@@ -83,20 +79,35 @@ async function translateTextEn(textInput) {
 }
 
 // Función para preguntar al usuario por el texto a traducir
-function askForText() {
-  print(chalk.magenta('============================================='));
-  print(chalk.magenta('=          Traductor de texto               ='));
-  print(chalk.magenta('============================================='));
-  let message = chalk.bgBlackBright.bold.italic('-> Ingrese el texto a traducir:') ;
-  message += chalk.bold('\n-+ ');
-  rl.question(message, (textInput) => {
-    if (textInput.toLowerCase() === 'exit') {
-      rl.close();
-      print(chalk.bold.italic.bgYellowBright('\n¡Hasta luego!'));
-    } else {
-      translateTextEs(textInput);
-    }
-  });
+async function askForText() {
+  print(chalk.magenta('============================================'));
+  print(chalk.magenta('=   Traductor de texto / Text Translator   ='));
+  print(chalk.magenta('============================================'));
+
+  const questions = [
+    {
+      type: 'list',
+      name: 'translationType',
+      message: 'Elija el tipo de traducción / Choose the type of translation',
+      choices: ['Español a Inglés / Spanish to English', 'Inglés a Español / English to Spanish', 'Salir / Exit'],
+    },
+    {
+      type: 'input',
+      name: 'textInput',
+      message: 'Ingrese el texto a traducir / Enter the text to translate:',
+      when: (answers) => answers.translationType !== 'Salir / Exit',
+    },
+  ];
+
+  const answers = await inquirer.prompt(questions);
+
+  if (answers.translationType === 'Salir') {
+    print(chalk.bold.italic.bgYellowBright('\n¡Hasta luego!'));
+  } else if (answers.translationType === 'Español a Inglés') {
+    translateTextEs(answers.textInput);
+  } else {
+    translateTextEn(answers.textInput);
+  }
 }
 
 // Inicio del programa
