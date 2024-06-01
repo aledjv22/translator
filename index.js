@@ -78,35 +78,49 @@ async function translateTextEn(textInput) {
   askForText();
 }
 
+// Función para preguntar al usuario por el idioma preferido
+async function askForLanguage() {
+  const languageQuestion = [
+    {
+      type: 'list',
+      name: 'language',
+      message: 'Please select your language / Por favor seleccione su idioma',
+      choices: ['English', 'Español'],
+    },
+  ];
+
+  const languageAnswer = await inquirer.prompt(languageQuestion);
+  return languageAnswer.language;
+}
+
+
 // Función para preguntar al usuario por el texto a traducir
 async function askForText() {
-  print(chalk.magenta('============================================'));
-  print(chalk.magenta('=   Traductor de texto / Text Translator   ='));
-  print(chalk.magenta('============================================'));
+  const language = await askForLanguage();
 
   const questions = [
     {
       type: 'list',
       name: 'translationType',
-      message: 'Elija el tipo de traducción / Choose the type of translation',
-      choices: ['Español a Inglés / Spanish to English', 'Inglés a Español / English to Spanish', 'Salir / Exit'],
+      message: language === 'English' ? 'Choose the type of translation' : 'Elija el tipo de traducción',
+      choices: language === 'English' ? ['English to Spanish', 'Spanish to English', 'Exit'] : ['Inglés a Español', 'Español a Inglés', 'Salir'],
     },
     {
       type: 'input',
       name: 'textInput',
-      message: 'Ingrese el texto a traducir / Enter the text to translate:',
-      when: (answers) => answers.translationType !== 'Salir / Exit',
+      message: language === 'English' ? 'Enter the text to translate:' : 'Ingrese el texto a traducir:',
+      when: (answers) => answers.translationType !== (language === 'English' ? 'Exit' : 'Salir'),
     },
   ];
 
   const answers = await inquirer.prompt(questions);
 
-  if (answers.translationType === 'Salir') {
-    print(chalk.bold.italic.bgYellowBright('\n¡Hasta luego!'));
-  } else if (answers.translationType === 'Español a Inglés') {
-    translateTextEs(answers.textInput);
-  } else {
+  if (answers.translationType === (language === 'English' ? 'Exit' : 'Salir')) {
+    print(chalk.bold.italic.bgYellowBright(language === 'English' ? '\nSee you later!' : '\n¡Hasta luego!'));
+  } else if (answers.translationType === (language === 'English' ? 'English to Spanish' : 'Inglés a Español')) {
     translateTextEn(answers.textInput);
+  } else {
+    translateTextEs(answers.textInput);
   }
 }
 
