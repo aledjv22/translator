@@ -5,7 +5,9 @@ async function startProgram(selectedLanguage: string) {
   askForText(selectedLanguage);
 }
 
-// Selección del idioma
-const selectedLanguage = await askForLanguage();
+(async () => {
+  // Selección del idioma
+  const selectedLanguage = await askForLanguage();
 
-startProgram(selectedLanguage);
+  startProgram(selectedLanguage);
+})();
