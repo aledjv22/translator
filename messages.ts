@@ -1,5 +1,14 @@
+interface IMessage {
+  translating: string;
+  translationIs: string;
+}
+
+interface IMessages {
+  [key: string]: IMessage;
+}
+
 // Mensajes en diferentes idiomas
-const messages = {
+const messages: IMessages = {
   'English': {
     'translating': '\nTranslating... Please wait.',
     'translationIs': '\n-> The translation is:',

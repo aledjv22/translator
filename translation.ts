@@ -5,13 +5,13 @@ import messages from './messages';
 import { askForText } from './interaction';
 
 // Variables globales
-let model, result;
+let model: string, result: any;
 
 // Función para imprimir mensajes en consola
 const print = console.log;
 
 // Función para traducir texto de español a ingles
-async function translateTextEs(textInput, selectedLanguage) {
+async function translateTextEs(textInput: any, selectedLanguage: string) {
   // Traducción de español a ingles
   model = "Helsinki-NLP/opus-mt-es-en";
   try {
@@ -43,7 +43,7 @@ async function translateTextEs(textInput, selectedLanguage) {
 }
 
 // Función para traducir texto de ingles a español
-async function translateTextEn(textInput, selectedLanguage) {
+async function translateTextEn(textInput: any, selectedLanguage: string) {
   // Traducción de ingles a español
   model = "Helsinki-NLP/opus-mt-en-es";
   try {

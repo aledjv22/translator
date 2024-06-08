@@ -2,6 +2,12 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import { translateTextEn, translateTextEs } from './translation';
 
+// Interface para las respuestas del usuario
+interface TranslationAnswers {
+  translationType: string;
+  textInput?: string;
+}
+
 // Función para imprimir mensajes en consola
 const print = console.log;
 
@@ -33,11 +39,11 @@ async function askForText(selectedLanguage: string): Promise<void> {
       type: 'input',
       name: 'textInput',
       message: selectedLanguage === 'English' ? 'Enter the text to translate:' : 'Ingrese el texto a traducir:',
-      when: (answers) => answers.translationType !== (selectedLanguage === 'English' ? 'Exit' : 'Salir'),
+      when: (answers: TranslationAnswers) => answers.translationType !== (selectedLanguage === 'English' ? 'Exit' : 'Salir'),
     },
   ];
 
-  const answers = await inquirer.prompt(questions);
+  const answers = await inquirer.prompt<TranslationAnswers>(questions);
 
   if (answers.translationType === (selectedLanguage === 'English' ? 'Exit' : 'Salir')) {
     print(chalk.bold.italic.bgYellowBright(selectedLanguage === 'English' ? '\nSee you later!' : '\n¡Hasta luego!'));
