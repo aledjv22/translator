@@ -19,11 +19,7 @@ async function translateTextEs(textInput: any, selectedLanguage: string) {
     print(chalk.bgMagenta.bold.italic(messages[selectedLanguage]['translating']));
     result = await hf.translation({
       model,
-      inputs: textInput,
-      parameters: {
-        "src_lang": "es",
-        "tgt_lang": "en"
-      }
+      inputs: textInput
     });
     // Resultado de la traducción
     print(
@@ -51,11 +47,7 @@ async function translateTextEn(textInput: any, selectedLanguage: string) {
     print(chalk.bgMagenta.bold.italic(messages[selectedLanguage]['translating']));
     result = await hf.translation({
       model,
-      inputs: textInput,
-      parameters: {
-        "src_lang": "en",
-        "tgt_lang": "es"
-      }
+      inputs: textInput
     });
     // Resultado de la traducción
     print(
