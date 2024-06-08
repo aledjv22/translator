@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import { translateTextEn, translateTextEs } from './translation';
+import { translateTextEn, translateTextEs } from './translation.js';
 
 // Interface para las respuestas del usuario
 interface TranslationAnswers {
