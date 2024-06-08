@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import clipboardy from 'clipboardy';
-import hf from './config.js';
-import messages from './messages.js';
-import { askForText } from './interaction.js';
+import hf from './config';
+import messages from './messages';
+import { askForText } from './interaction';
 
 // Variables globales
 let model, result;

@@ -1,12 +1,12 @@
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import { translateTextEn, translateTextEs } from './translation.js';
+import { translateTextEn, translateTextEs } from './translation';
 
 // Función para imprimir mensajes en consola
 const print = console.log;
 
 // Función para preguntar al usuario por el idioma preferido
-async function askForLanguage() {
+async function askForLanguage(): Promise<string> {
   const languageQuestion = [
     {
       type: 'list',
@@ -21,7 +21,7 @@ async function askForLanguage() {
 }
 
 // Función para preguntar al usuario por el texto a traducir
-async function askForText(selectedLanguage) {
+async function askForText(selectedLanguage: string): Promise<void> {
   const questions = [
     {
       type: 'list',

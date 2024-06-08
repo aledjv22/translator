@@ -1,7 +1,7 @@
-import { askForLanguage, askForText } from './interaction.js';
+import { askForLanguage, askForText } from './interaction';
 
 // Inicio del programa
-async function startProgram() {
+async function startProgram(selectedLanguage: string) {
   askForText(selectedLanguage);
 }
 
