@@ -10,30 +10,35 @@ Este proyecto consiste en una herramienta para la terminal que permite traducir 
 6. Finalizar la ejecución: `Ctrl + D` o ingresar `exit`.
 
 ## Uso
-Una vez inicializado el programa se le indicará que ingrese el texto a traducir. Luego de presionar `Enter` se mostrará el texto traducido. Luego podrá volver a realizar una nueva traducción, pero en caso de no querer hacerlo puede ingresar `exit` para finalizar la ejecución del programa o presionar `Ctrl + D`.
+Una vez inicializado el programa se le indica al usuario que seleccione el idioma para mostrarle la interfaz en ese idioma. Luego, se le solicita al usuario seleccione de que idioma a que idioma desea traducir el texto. Posteriormente, se le solicita al usuario que ingrese el texto a traducir. Finalmente, se muestra la traducción del texto ingresado, se copia al portapapeles y nuevamente se le consulta al usuario de que idioma a que idioma desea traducir otro texto.
 
 ## Ejemplos
 ### Textual
 ```
 $ node dist/index.js # o npm run start
-=============================================
-=          Traductor de texto               =
-=============================================
--> Ingrese el texto a traducir:
--+ Hola
+? Please select your language / Por favor seleccione su idioma Español
+? Elija el tipo de traducción Español a Inglés
+? Ingrese el texto a traducir: Hola
 
--> La traducción al ingles es: 
+Traduciendo... Por favor, espere.
+
+-> La traducción es: 
 -+ Hello. 
+
+? Elija el tipo de traducción (Use arrow keys)
+❯ Inglés a Español 
+  Español a Inglés 
+  Salir 
 ```
 
 ### Imagen
 <div align="center">
-  <img src="https://i.ibb.co/2YkfnN7/Captura-desde-2024-05-19-14-35-52.png" />
+  <img src="https://i.ibb.co/4ZqgV2K/Captura-desde-2024-06-08-16-05-37.png" />
 </div>
 
 ### GIF
 <div align="center">
-  <img src="https://i.ibb.co/pyrrdF8/Grabaci-n-de-pantalla-desde-2024-05-19-15-05-22.gif" />
+  <img src="https://i.ibb.co/0jXsRxc/Grabaci-n-de-pantalla-desde-2024-06-08-16-09-40.gif" />
 </div>
 
 ## Dependencias
